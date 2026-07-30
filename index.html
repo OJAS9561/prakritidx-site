@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrakritiDx — Know Your Constitution</title>
+<meta name="description" content="AI-powered skin and hair analysis rooted in Ayurvedic diagnostics and modern dermatology.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#173428;
+    --sage:#7C9A78;
+    --sage-light:#EDF1E8;
+    --copper:#BE7A1F;
+    --turmeric:#D99A3D;
+    --cream:#FAF7F1;
+    --ink:#25291F;
+    --line:#DDE3D6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Work Sans',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;color:var(--forest);}
+  a{color:inherit;}
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px;}
+
+  /* NAV */
+  header{
+    position:sticky;top:0;z-index:20;
+    background:rgba(250,247,241,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    padding-top:16px;padding-bottom:16px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem;color:var(--forest);}
+  .seal{
+    width:30px;height:30px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #2C5443, var(--forest) 70%);
+    border:1px solid var(--turmeric);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--turmeric);font-size:.75rem;font-weight:600;
+    flex-shrink:0;
+  }
+  nav ul{list-style:none;display:flex;gap:22px;font-size:.92rem;}
+  nav ul a{text-decoration:none;color:var(--ink);opacity:.8;}
+  nav ul a:hover{opacity:1;color:var(--copper);}
+  nav ul{flex-wrap:wrap;}
+
+  /* HERO */
+  .hero{padding:72px 0 56px;position:relative;overflow:hidden;}
+  .rings{
+    position:absolute;right:-90px;top:-60px;width:320px;height:320px;
+    border-radius:50%;
+    background:
+      repeating-radial-gradient(circle at center, transparent 0 18px, rgba(190,122,31,.10) 19px 20px);
+    opacity:.9;pointer-events:none;
+  }
+  .eyebrow{
+    display:inline-block;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--copper);font-weight:600;margin-bottom:14px;
+  }
+  .hero h1{font-size:2.5rem;line-height:1.15;max-width:14ch;margin-bottom:18px;}
+  .hero p.lead{font-size:1.08rem;max-width:46ch;color:#454A3C;margin-bottom:30px;}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    display:inline-block;padding:13px 26px;border-radius:6px;
+    font-weight:500;font-size:.95rem;text-decoration:none;
+    border:1px solid transparent;
+  }
+  .btn-primary{background:var(--forest);color:var(--cream);}
+  .btn-primary:hover{background:#0F2A20;}
+  .btn-ghost{border-color:var(--forest);color:var(--forest);}
+  .btn-ghost:hover{background:var(--sage-light);}
+
+  /* SECTIONS */
+  section{padding:56px 0;border-top:1px solid var(--line);}
+  section h2{font-size:1.6rem;margin-bottom:10px;}
+  .sub{color:#5B6152;max-width:56ch;margin-bottom:34px;}
+
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:10px;padding:26px;
+  }
+  .card .tag{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);font-weight:600;margin-bottom:8px;display:block;}
+  .card h3{font-size:1.15rem;margin-bottom:8px;}
+  .card p{color:#4B5142;font-size:.95rem;}
+  .price{font-family:'Fraunces',serif;font-size:1.9rem;color:var(--copper);margin:10px 0 4px;}
+  .price small{font-family:'Work Sans',sans-serif;font-size:.9rem;color:#777;font-weight:400;}
+
+  .steps{counter-reset:step;list-style:none;}
+  .steps li{
+    counter-increment:step;position:relative;padding-left:44px;margin-bottom:22px;
+  }
+  .steps li::before{
+    content:counter(step);
+    position:absolute;left:0;top:0;
+    width:30px;height:30px;border-radius:50%;
+    background:var(--sage-light);border:1px solid var(--sage);
+    color:var(--forest);font-weight:600;font-size:.85rem;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .steps h3{font-size:1rem;margin-bottom:3px;}
+  .steps p{color:#5B6152;font-size:.92rem;}
+
+  address{font-style:normal;color:#4B5142;}
+  address a{color:var(--copper);text-decoration:none;}
+  address a:hover{text-decoration:underline;}
+
+  .policy h3{font-size:1.15rem;margin:26px 0 8px;}
+  .policy p, .policy li{color:#454A3C;font-size:.95rem;margin-bottom:10px;}
+  .policy ul{padding-left:20px;}
+
+  footer{
+    background:var(--forest);color:#D9E2D3;padding:34px 0;font-size:.85rem;
+  }
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  footer a{color:#D9E2D3;opacity:.85;text-decoration:none;}
+  footer a:hover{opacity:1;}
+
+  @media (max-width:640px){
+    .grid-2{grid-template-columns:1fr;}
+    .hero h1{font-size:2rem;}
+    nav ul{gap:14px;font-size:.82rem;}
+    footer .wrap{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="brand"><span class="seal">P</span> PrakritiDx</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#policies">Policies</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <div class="rings"></div>
+  <div class="wrap">
+    <span class="eyebrow">Know Your Constitution</span>
+    <h1>Skin and hair analysis, read through Ayurveda and modern medicine together.</h1>
+    <p class="lead">PrakritiDx looks at a photo or a lab report you already have, and explains what's happening — in the language of dosha and constitution, backed by clinical reasoning. No products to buy. Just guidance.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#how">See how it works</a>
+      <a class="btn btn-ghost" href="#pricing">View pricing</a>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <h2>How it works</h2>
+    <p class="sub">Two areas of focus — skin and hair — each following the same simple path.</p>
+    <ol class="steps">
+      <li>
+        <h3>Describe the concern</h3>
+        <p>Tell us what's going on in a few lines, and upload a selfie or an existing lab/test report if you have one.</p>
+      </li>
+      <li>
+        <h3>Answer a short set of questions</h3>
+        <p>A focused set of multiple-choice questions, plus an optional note for anything specific — allergies, thyroid, PCOS, medications, and so on.</p>
+      </li>
+      <li>
+        <h3>Get a free preliminary read</h3>
+        <p>An accurate, partial conclusion — enough to understand the direction, before deciding whether to go deeper.</p>
+      </li>
+      <li>
+        <h3>Unlock the full report</h3>
+        <p>A detailed report with your constitution analysis, likely causes, and specific diet and practice recommendations — generated for you after payment.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <h2>Pricing</h2>
+    <p class="sub">Simple, one-time pricing. No subscriptions.</p>
+    <div class="grid-2">
+      <div class="card">
+        <span class="tag">Single report</span>
+        <h3>Skin or Hair</h3>
+        <div class="price">₹99</div>
+        <p>One detailed report for either skin or hair, generated fresh after payment.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Best value</span>
+        <h3>Skin + Hair Combo</h3>
+        <div class="price">₹149</div>
+        <p>Both detailed reports together, at a lower combined price.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <p class="sub">Questions about a report, a payment, or anything else — reach out directly.</p>
+    <address>
+      Email: <a href="mailto:contact@prakritidx.com">contact@prakritidx.com</a><br>
+      We aim to respond within 24–48 hours.
+    </address>
+  </div>
+</section>
+
+<section id="policies" class="policy">
+  <div class="wrap">
+    <h2>Policies</h2>
+    <p class="sub">Terms, privacy, and refunds — in plain language.</p>
+
+    <h3 id="terms">Terms &amp; Conditions</h3>
+    <p>By using PrakritiDx, you agree to the following:</p>
+    <ul>
+      <li>PrakritiDx provides educational guidance based on Ayurvedic principles and general dermatological understanding. It is not a substitute for diagnosis or treatment by a qualified doctor or dermatologist.</li>
+      <li>Reports are generated based on the information, photos, and documents you provide. Accuracy depends on the quality and honesty of that input.</li>
+      <li>You must be 18 or older, or use the service with a parent or guardian's involvement, to make a purchase.</li>
+      <li>Content, branding, and report formats are the property of PrakritiDx and may not be reproduced or resold.</li>
+      <li>We may update these terms from time to time; continued use after changes means you accept the updated terms.</li>
+    </ul>
+
+    <h3 id="privacy">Privacy Policy</h3>
+    <p>Your data matters, especially since it's health-related.</p>
+    <ul>
+      <li>Photos, lab reports, and answers you submit are used only to generate your report and are not sold to third parties.</li>
+      <li>We use trusted third-party services (such as AI providers and payment processors) to operate the app; these providers process data only as needed to deliver the service.</li>
+      <li>You can request deletion of your data at any time by writing to us at the contact email above.</li>
+      <li>We retain data only as long as needed to provide the service and meet legal requirements.</li>
+    </ul>
+
+    <h3 id="refunds">Refund Policy</h3>
+    <p>We want you to feel the report was worth it.</p>
+    <ul>
+      <li>Since reports are generated individually for each user immediately after payment, refunds are not available once a report has been successfully generated and delivered.</li>
+      <li>If a payment is deducted but no report is generated due to a technical error, contact us with your payment reference and we will issue a full refund or regenerate your report at no extra cost.</li>
+      <li>Refund requests, where applicable, are processed within 5–7 business days to the original payment method.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 PrakritiDx. All rights reserved.</div>
+    <div><a href="#terms">Terms</a> &nbsp;·&nbsp; <a href="#privacy">Privacy</a> &nbsp;·&nbsp; <a href="#refunds">Refunds</a> &nbsp;·&nbsp; <a href="#contact">Contact</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
